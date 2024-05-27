@@ -33,6 +33,39 @@ setTimeout(() => {
 
 playButton.addEventListener("click", onPlay);
 
+
+const loadingtext = document.getElementById('loadingtext');
+const dots = Array.from({ length: 4 }, () => {
+  const dot = document.createElement('span');
+  dot.textContent = '.';
+  dot.style.opacity = '0'; // Initial opacity for all dots
+  loadingtext.appendChild(dot);
+  return dot;
+});
+
+let currentDotIndex = -1; // Start with -1 to reset all dots initially
+
+const changeDotOpacity = () => {
+  if (currentDotIndex === -1) {
+    // Reset all dots to opacity 0 before starting the cycle
+    dots.forEach(dot => dot.style.opacity = '0');
+  }
+
+  dots.forEach((dot, index) => {
+    if (index < currentDotIndex) {
+      dot.style.opacity = '1'; // Keep previous dots at opacity 1
+    } else {
+      dot.style.opacity = '0'; // Reset remaining dots to opacity 0
+    }
+  });
+
+  currentDotIndex = (currentDotIndex + 1) % (dots.length + 1);
+};
+
+setInterval(changeDotOpacity, 300);
+
+
+
 function onPlay() {
     playButton.removeEventListener('click', onplay);
     main.classList.add("animateback");
