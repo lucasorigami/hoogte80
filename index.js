@@ -34,6 +34,7 @@ setTimeout(() => {
 playButton.addEventListener("click", onPlay);
 
 function onPlay() {
+    playButton.removeEventListener('click', onplay);
     main.classList.add("animateback");
     main.classList.remove("animate")
     headphones.style.opacity = "0";
